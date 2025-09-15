@@ -993,13 +993,13 @@ protected:
         }
     }
 
-    void init_kkt_fac()
+    virtual void init_kkt_fac()
     {
         PIQP_TRACY_ZoneScopedN("piqp::MultistageKKT::init_kkt_fac");
         construct_kkt_fac<true>(work_x);
     }
 
-    void populate_kkt_fac(const Vec<T>& x_reg)
+    virtual void populate_kkt_fac(const Vec<T>& x_reg)
     {
         PIQP_TRACY_ZoneScopedN("piqp::MultistageKKT::populate_kkt_fac");
         construct_kkt_fac<false>(x_reg);
@@ -1250,7 +1250,7 @@ protected:
         }
     }
 
-    void factor_kkt()
+    virtual void factor_kkt()
     {
         PIQP_TRACY_ZoneScopedN("piqp::MultistageKKT::factor_kkt");
 
@@ -1706,7 +1706,7 @@ protected:
     }
 
     // solves A * x = b inplace
-    void solve_llt_in_place(BlockVec& b_and_x)
+    virtual void solve_llt_in_place(BlockVec& b_and_x)
     {
         PIQP_TRACY_ZoneScopedN("piqp::MultistageKKT::solve_llt_in_place");
 
