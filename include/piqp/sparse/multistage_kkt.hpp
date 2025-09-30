@@ -179,6 +179,7 @@ public:
 
     bool update_scalings_and_factor(const Data<T, I>&, const T& delta, const Vec<T>& x_reg, const Vec<T>& z_reg) override
     {
+        PIQP_TRACY_ZoneScopedN("piqp::MultistageKKT::update_scalings_and_factor");
         m_delta = delta;
         m_z_reg_inv.array() = z_reg.array().inverse();
 
@@ -857,8 +858,8 @@ protected:
 #endif
         for (std::size_t i = 0; i < N - 1; i++)
         {
-            PIQP_TRACY_ZoneScopedN("piqp::MultistageKKT::block_syrk_ln::diagonal");
-            PIQP_TRACY_ZoneValue(i);
+            // PIQP_TRACY_ZoneScopedN("piqp::MultistageKKT::block_syrk_ln::diagonal");
+            // PIQP_TRACY_ZoneValue(i);
 
             // D_{i,i} = 0
             if (!allocate && sD.D[i]) {
@@ -930,8 +931,8 @@ protected:
 #endif
         for (std::size_t i = 0; i < N - 2; i++)
         {
-            PIQP_TRACY_ZoneScopedN("piqp::MultistageKKT::block_syrk_ln::off_diagonal");
-            PIQP_TRACY_ZoneValue(i);
+            // PIQP_TRACY_ZoneScopedN("piqp::MultistageKKT::block_syrk_ln::off_diagonal");
+            // PIQP_TRACY_ZoneValue(i);
 
             if (sA.B[i] && sB.D[i]) {
                 if (allocate) {
@@ -956,8 +957,8 @@ protected:
 #endif
             for (std::size_t i = 0; i < N - 1; i++)
             {
-                PIQP_TRACY_ZoneScopedN("piqp::MultistageKKT::block_syrk_ln::arrow");
-                PIQP_TRACY_ZoneValue(i);
+                // PIQP_TRACY_ZoneScopedN("piqp::MultistageKKT::block_syrk_ln::arrow");
+                // PIQP_TRACY_ZoneValue(i);
 
                 // D_{N,i} = 0
                 if (!allocate && sD.E[i]) {
@@ -1038,8 +1039,8 @@ protected:
 #endif
         for (std::size_t i = 0; i < N; i++)
         {
-            PIQP_TRACY_ZoneScopedN("piqp::MultistageKKT::construct_kkt_fac::diagonal");
-            PIQP_TRACY_ZoneValue(i);
+            // PIQP_TRACY_ZoneScopedN("piqp::MultistageKKT::construct_kkt_fac::diagonal");
+            // PIQP_TRACY_ZoneValue(i);
 
             I m = block_info[i].diag_size;
 
@@ -1096,8 +1097,8 @@ protected:
 #endif
         for (std::size_t i = 0; i < N - 2; i++)
         {
-            PIQP_TRACY_ZoneScopedN("piqp::MultistageKKT::construct_kkt_fac::off_diagonal");
-            PIQP_TRACY_ZoneValue(i);
+            // PIQP_TRACY_ZoneScopedN("piqp::MultistageKKT::construct_kkt_fac::off_diagonal");
+            // PIQP_TRACY_ZoneValue(i);
 
             int m = block_info[i].off_diag_size;
             int n = block_info[i].diag_size;
@@ -1159,8 +1160,8 @@ protected:
 #endif
             for (std::size_t i = 0; i < N - 1; i++)
             {
-                PIQP_TRACY_ZoneScopedN("piqp::MultistageKKT::construct_kkt_fac::arrow");
-                PIQP_TRACY_ZoneValue(i);
+                // PIQP_TRACY_ZoneScopedN("piqp::MultistageKKT::construct_kkt_fac::arrow");
+                // PIQP_TRACY_ZoneValue(i);
 
                 int m = arrow_width;
                 int n = block_info[i].diag_size;
